@@ -1,0 +1,23 @@
+ {% extends "base.html.twig" %}
+
+{% block title %}Home |
+{{ parent() }} 
+{% endblock %}
+
+{% form_theme formWish 'bootstrap_5_layout.html.twig' %}
+
+ {% block central %}
+    <div class="titre">
+        <h1>Add wish</h1>
+    </div>
+
+    <div class="form">
+        {{ form_start(formWish) }}
+        
+        {{ form_widget(formWish) }}
+          <button type="button" class="btn btn-success">Envoyer</button>
+
+        {{ form_end(formWish) }}
+    </div>
+
+ {% endblock %}
