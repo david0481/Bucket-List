@@ -5,7 +5,7 @@
 {% endblock %}
 
  {% block central %}
- <h1>Liste</h1>
+ <h1>Gestion wish</h1>
 
 <a href="{{ path('wish_add') }}">Add wish</a>
 
@@ -16,6 +16,8 @@
       <th scope="col">id</th>
       <th scope="col">Title</th>
       <th scope="col">Date</th>
+      <th scope="col">Modifier</th>
+      <th scope="col">Supprimer</th>
     </tr>
   </thead>
       {% for w in wishes %}
@@ -24,6 +26,9 @@
       <th scope="row">{{ w.id}}</th>
       <td><a href="{{ path('list_detail', {id :w.id}) }}">{{ w.title }}</a></td>
       <td>{{ w.dateCreated|date("m/d/Y H:i:s") }}</td>
+      <td><a href="{{ path('modifier_wish',{ id:w.id }) }}">Modifier</a></td>
+      <td><a href="{{ path('supprimer_wish',{ id:w.id }) }}">Supprimer</a></td>
+
     </tr>
     <tr>
   </tbody>

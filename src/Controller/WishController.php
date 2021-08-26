@@ -30,36 +30,16 @@ class WishController extends AbstractController
         /**
      * @Route("/list/detail/{id}", name="list_detail")
      */
-    public function detail($id): Response
+    public function detail(Wish $wish): Response
     {
 
         // on appelle wish
-        $wish = $this->getDoctrine()->getRepository(Wish::class)->findBy(['id' => $id],[]);
-        dump($wish);
+       // $wish = $this->getDoctrine()->getRepository(Wish::class)->findBy(['id' => $id],[]);
+
 
         return $this->render('wish/detail.html.twig', [
-            "id" => $id,
             "wish" => $wish,
         ]);
-    }
-
-            /**
-     * @Route("/ajouter", name="ajouter")
-     */
-    public function ajouter(EntityManagerInterface $em): Response
-    {
-        $wish = new Wish();
-        $wish->setAuthor('Avé César');
-        $wish->setTitle('Romain');
-        $wish->setDescription('Je suis un empereur !!!');
-        $wish->setIsPublished(1);
-        $wish->setDateCreated(new DateTime('now'));
-
-        $em->persist($wish);        // met wish à disposition
-        $em->flush();                   //on sauvegarde en BDD
-
-        //redirection vers la route list
-        return $this->redirectToRoute('list');
     }
 
         /**

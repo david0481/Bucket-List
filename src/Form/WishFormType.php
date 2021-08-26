@@ -29,10 +29,10 @@ class WishFormType extends AbstractType
             ->add('author', TextType::class, [
                 'label' => 'Auteur : '
             ])
-            ->add('isPublished', HiddenType::class, [
+/*             ->add('isPublished', HiddenType::class, [
             ])
             ->add('dateCreated', HiddenType::class, [
-                ])
+                ]) */
         ;
     }
 

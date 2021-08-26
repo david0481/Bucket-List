@@ -3,14 +3,19 @@
  {% block central %}
  <h1>Détail</h1>
 
- <table class="table">
-  <tbody>
-    <tr>
-      <th scope="row">{{ id }}</th>
-      <td>{{ wish.author }}</td>
-    </tr>
-    <tr>
-  </tbody>
-</table>
+
+      titre : {{ wish.title }}
+      <br>
+      <br>
+      auteur : {{ wish.author }}
+      <br>
+      <br>
+      description : {{ wish.description }}
+      <br>
+      <br>
+      Date de création : {{ wish.dateCreated|date("m/d/Y H:i:s") }}
+      <br>
+      <br>
+      <br>
 
  {% endblock %}
