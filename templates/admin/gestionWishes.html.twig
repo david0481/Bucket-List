@@ -5,15 +5,15 @@
 {% endblock %}
 
  {% block central %}
+ 
  <h1>Gestion wish</h1>
 
-<a href="{{ path('wish_add') }}">Add wish</a>
+<a href="{{ path('wish_add') }}" class="btn btn-success"><i class="fas fa-plus"></i></a>
 
-<table class="table">
+<table class="table table-striped mt-4">
 
   <thead>
     <tr>
-      <th scope="col">id</th>
       <th scope="col">Title</th>
       <th scope="col">Date</th>
       <th scope="col">Modifier</th>
@@ -23,16 +23,28 @@
       {% for w in wishes %}
   <tbody>
     <tr>
-      <th scope="row">{{ w.id}}</th>
       <td><a href="{{ path('list_detail', {id :w.id}) }}">{{ w.title }}</a></td>
-      <td>{{ w.dateCreated|date("m/d/Y H:i:s") }}</td>
-      <td><a href="{{ path('modifier_wish',{ id:w.id }) }}">Modifier</a></td>
-      <td><a href="{{ path('supprimer_wish',{ id:w.id }) }}">Supprimer</a></td>
-
+      <td>{{ w.dateCreated|date("m/d/Y") }}</td>
+      <td><a href="{{ path('modifier_wish',{ id:w.id }) }}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a></td>
+      <td><a onclick="return confirm('Supprimer :{{ w.title }} ?')" href="{{ path('supprimer_wish',{ id:w.id }) }}" class="btn btn-danger">
+      <i class="fas fa-trash"></i></a>
+      </td>
     </tr>
     <tr>
   </tbody>
   {% endfor %}
 </table>
+
+{#  		<form action="{{ path('quick_add')}}" method="post">
+			<div class="row">
+
+				<div class="col-10"><input placeholder="Ajout rapide de Wish" name="title" class="form-control"></div>
+				<div class="col-2">
+					<button type="submit" class="btn btn-success">
+						<i class="fas fa-plus"></i>
+					</button>
+				</div>
+			</div>
+		</form>  #}
 
  {% endblock %}

@@ -1,7 +1,33 @@
  {% extends "base.html.twig" %}
 
- {% block central %}
- <h1>Accueil</h1>
+{% block title %}Home |
+{{ parent() }} 
+{% endblock %}
 
+ {% block central %}
+ <h1>Liste des wishes</h1>
+
+{# <a href="{{ path('wish_add') }}">Add wish</a> #}
+
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th scope="col">Titles</th>
+      <th scope="col">Dates</th>
+        <th scope="col">Catégories</th>
+    </tr>
+  </thead>
+      {% for w in wishes %}
+  <tbody>
+    <tr>
+      <td>{{ w.title }}  <a href="{{ path('list_detail', {id :w.id}) }}"><i class="fas fa-plus btn btn-primary"></i></a></td>
+      <td>{{ w.dateCreated|date("m/d/Y") }}</td>
+      <td>{{ w.categorie.name }}</td>
+    </tr>
+    <tr>
+  </tbody>
+  {% endfor %}
+</table>
 
  {% endblock %}

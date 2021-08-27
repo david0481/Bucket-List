@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/gestion-wishes", name="gestion_wishes")
+     * @Route("/admin/gestion-wishes", name="gestion_wishes")
      */
     public function GestionWishes(WishRepository $repo): Response
     {
@@ -26,7 +26,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/modifier-wish/{id}", name="modifier_wish")
+     * @Route("/admin/modifier-wish/{id}", name="modifier_wish")
      */
     public function modifier(Wish $wish, Request $request, EntityManagerInterface $em): Response
     {
@@ -35,7 +35,7 @@ class AdminController extends AbstractController
 
         if($formWish->isSubmitted()) {
             $em->flush();
-            return $this->redirectToRoute('list');
+            return $this->redirectToRoute('accueil');
         } 
 
         return $this->render('admin/modifierWish.html.twig', [
@@ -44,21 +44,29 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/supprimer-wish/{id}", name="supprimer_wish")
+     * @Route("/admin/supprimer-wish/{id}", name="supprimer_wish")
      */
     public function supprimer(Wish $wish, Request $request, EntityManagerInterface $em): Response
     {
-        $formWish = $this ->createForm(WishFormType::class, $wish);
-        $formWish->handleRequest($request);
 
-        if($formWish->isSubmitted()) {
-            $em->remove($wish);
-            $em->flush();
-            return $this->redirectToRoute('list');
-        } 
-
-        return $this->render('admin/supprimerWish.html.twig', [
-             'formWish' => $formWish->createView(),
-        ]);
+        $em->remove($wish);
+        $em->flush();
+        return $this->redirectToRoute('gestion_wishes');
     }
+
+    /**
+     * @Route("/admin/quick-add", name="quick_add")
+     */
+/*     public function quick_add(Request $req, EntityManagerInterface  $em): Response
+    {
+        $wish = new Wish();
+        $wish->setTitle($req->get('title'));
+        $wish->setAuthor('Quicky');
+        $wish->setCategorie()->setTitle('autres');  // problème !!
+        $wish->setIsPublished(true);
+        $wish->setDateCreated(new \DateTime());
+        $em->persist($wish);
+        $em->flush();
+        return $this->redirectToRoute('gestion_wishes');
+    } */
 }

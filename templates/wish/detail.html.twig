@@ -1,21 +1,31 @@
  {% extends "base.html.twig" %}
 
  {% block central %}
- <h1>Détail</h1>
+ <div class= "justify-content-center align-items-center">
+ <h1>Détails</h1>
 
-
-      titre : {{ wish.title }}
-      <br>
-      <br>
-      auteur : {{ wish.author }}
-      <br>
-      <br>
-      description : {{ wish.description }}
-      <br>
-      <br>
-      Date de création : {{ wish.dateCreated|date("m/d/Y H:i:s") }}
-      <br>
-      <br>
-      <br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class = "col-4">WISH</th>
+      <th class = "col-8">{{ wish.title }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Description</th>
+      <td>{{ wish.description }}</td>
+    </tr>
+    <tr>
+      <th>Auteur</th>
+      <td>{{ wish.author }}</td>
+    </tr>
+    <tr>
+      <th>Date de création</th>
+      <td>{{ wish.dateCreated|date("m/d/Y H:i:s") }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
  {% endblock %}

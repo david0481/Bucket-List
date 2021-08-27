@@ -15,19 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class WishController extends AbstractController
 {
     /**
-     * @Route("/list", name="list")
-     */
-    public function list(WishRepository $repo): Response
-    {
-        $tab = $repo->findBy([],['dateCreated' => 'desc']);
-        dump($tab);
-
-        return $this->render('wish/list.html.twig', [
-            'wishes' => $tab,
-        ]);
-    }
-
-        /**
      * @Route("/list/detail/{id}", name="list_detail")
      */
     public function detail(Wish $wish): Response
@@ -58,7 +45,7 @@ class WishController extends AbstractController
             $wish->setIsPublished(true);
             $em->persist($wish);
             $em->flush();
-            return $this->redirectToRoute('list');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('wish/add.html.twig', [
@@ -66,6 +53,19 @@ class WishController extends AbstractController
         ]);
     }
 
-
+    /**
+     * @Route("/ajouter-brut", name="wish_ajouter_brut")
+     */
+    public function ajouterBrut(Request $request, EntityManagerInterface $em): Response
+    {
+        $wish = new Wish();
+        $wish = $request->get('title');
+        $wish->setTitle($wish);
+        $em->persist($wish);
+        $em->flush();
+        return $this->redirectToRoute('accueil');
+    }
 }
+
+
 

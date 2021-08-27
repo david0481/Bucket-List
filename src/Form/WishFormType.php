@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Wish;
+use PhpParser\Node\Stmt\Label;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLabel;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -29,6 +31,7 @@ class WishFormType extends AbstractType
             ->add('author', TextType::class, [
                 'label' => 'Auteur : '
             ])
+            ->add('categorie', null, ["choice_label" => "name"])
 /*             ->add('isPublished', HiddenType::class, [
             ])
             ->add('dateCreated', HiddenType::class, [
