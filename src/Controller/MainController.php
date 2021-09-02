@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("/user/", name="accueil")
      */
     public function home(WishRepository $repo): Response
     {
@@ -22,7 +22,7 @@ class MainController extends AbstractController
     }
 
      /**
-     * @Route("/contact", name="contact")
+     * @Route("/user/contact", name="contact")
      */
     public function contact(): Response
     {
@@ -33,7 +33,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/about", name="about")
+     * @Route("/user/about", name="about")
      */
     public function about(): Response
     {

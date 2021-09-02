@@ -35,8 +35,15 @@
 							<li class="nav-item">
 								<a class="nav-link {% if route == 'contact' %} active {% endif %}" href="{{ path('contact') }}">Contact</a>
 							</li>
+							{% if is_granted('ROLE_ADMIN') %}
 							<li class="nav-item">
 								<a class="nav-link {% if route == 'gestion_wishes' %} active {% endif %}" href="{{ path('gestion_wishes') }}">Gestion</a>
+							</li>
+							{% endif %}
+							<li class="nav-item">
+							{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    							<a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+							{% endif %}
 							</li>
 						</ul>
 					</div>

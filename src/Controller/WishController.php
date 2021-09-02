@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class WishController extends AbstractController
 {
     /**
-     * @Route("/list/detail/{id}", name="list_detail")
+     * @Route("/user/list/detail/{id}", name="list_detail")
      */
     public function detail(Wish $wish): Response
     {
@@ -30,7 +30,7 @@ class WishController extends AbstractController
     }
 
         /**
-     * @Route("/add", name="wish_add")
+     * @Route("/user/add", name="wish_add")
      */
     public function add(Request $request, EntityManagerInterface $em): Response
     {
@@ -54,7 +54,7 @@ class WishController extends AbstractController
     }
 
     /**
-     * @Route("/ajouter-brut", name="wish_ajouter_brut")
+     * @Route("/user/ajouter-brut", name="wish_ajouter_brut")
      */
     public function ajouterBrut(Request $request, EntityManagerInterface $em): Response
     {

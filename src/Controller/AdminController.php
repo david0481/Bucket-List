@@ -16,6 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
+     * @Route("/admin", name="admin")
+     */
+    public function index(): Response
+    {
+        // quel est l id du user connecter ?
+        $user = $this->getUser();
+                
+        return $this->render('admin/gestion.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
      * @Route("/admin/gestion-wishes", name="gestion_wishes")
      */
     public function GestionWishes(WishRepository $repo): Response
