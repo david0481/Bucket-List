@@ -55,7 +55,7 @@
 		<div class="container px-5">
 		    {% for label, messages in app.flashes(['success', 'warning']) %}
     {% for message in messages %}
-        <div class="alert-{{ label }}">
+        <div class="alert alert-{{ label }}" role="alert">
             {{ message }}
         </div>
     {% endfor %}
