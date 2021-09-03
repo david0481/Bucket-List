@@ -37,7 +37,7 @@
 							</li>
 							{% if is_granted('ROLE_ADMIN') %}
 							<li class="nav-item">
-								<a class="nav-link {% if route == 'gestion_wishes' %} active {% endif %}" href="{{ path('gestion_wishes') }}">Gestion</a>
+								<a class="nav-link {% if route == 'admin' %} active {% endif %}" href="{{ path('admin') }}">Gestion</a>
 							</li>
 							{% endif %}
 							<li class="nav-item">
@@ -53,13 +53,20 @@
 		</header>
 
 		<div class="container px-5">
+		    {% for label, messages in app.flashes(['success', 'warning']) %}
+    {% for message in messages %}
+        <div class="alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 			{# zone modifiable #}
 			{% block central %}
 				
 			{% endblock %}
 		</div>
 		<!-- Footer-->
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-dark fixed-bottom">
     <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">BucketList &copy;  2021</p></div>
 </footer>
 

@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\User;
 use App\Entity\Wish;
+use App\Form\EditUserType;
 use App\Form\WishFormType;
 use App\Repository\CategorieRepository;
+use App\Repository\UserRepository;
 use App\Repository\WishRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,4 +93,51 @@ class AdminController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('gestion_wishes');
     }
+
+    /**
+     * @Route("/admin/utilisateurs", name="admin_utilisateurs")
+     */
+    public function usersList(UserRepository $users)
+    {
+        return $this->render('admin/users.html.twig', [
+            'users' => $users->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/utilisateurs/modifier/{id}", name="admin_modifier_utilisateur")
+     */
+    public function editUser(User $user, Request $request)
+    {
+        $form = $this->createForm(EditUserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Utilisateur modifié avec succès');
+            return $this->redirectToRoute('admin_utilisateurs');
+        }
+        
+        return $this->render('admin/edituser.html.twig', [
+            'userForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/utilisateurs/supprimer/{id}", name="admin_supprimer_utilisateur")
+     */
+    public function supprimerUser(User $user, EntityManagerInterface $em): Response
+    {
+
+        $em->remove($user);
+        $em->flush();
+
+        $this->addFlash('success', 'Utilisateur supprimé avec succès');
+
+        return $this->redirectToRoute('admin_utilisateurs');
+    }
+
 }

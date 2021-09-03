@@ -1,11 +1,15 @@
  {% extends "base.html.twig" %}
 
-{% block title %}Home |
-{{ parent() }} 
+{% block title %}Gestion - {{ parent() }} 
 {% endblock %}
 
  {% block central %}
  
  <h1>Gestion</h1>
+
+    <a class="nav-link" href="{{ path('gestion_wishes') }}">Gestion wishes</a>
+    <a class="nav-link" href="{{ path('admin_utilisateurs') }}">Gestion utilisateurs</a>
+
+
 
  {% endblock %}
