@@ -34,10 +34,11 @@
 			</div>
 		</div>
 		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-		<button class="btn btn-lg btn-primary" type="submit">
+		<button class="btn btn-primary my-3" type="submit">
 			S'identifier
 		</button>
 	</form>
+	<a href="{{ path('app_register') }}">S'enregistrer</a>
 </div>
 
 {% endblock %}
