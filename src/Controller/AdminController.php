@@ -48,8 +48,13 @@ class AdminController extends AbstractController
          $formWish = $this ->createForm(WishFormType::class, $wish);
         $formWish->handleRequest($request);
 
-        if($formWish->isSubmitted()) {
+        if($formWish->isSubmitted() && $formWish->isValid()) {
             $em->flush();
+
+            $this->addFlash(
+                'success',
+                'Changement effectué'
+            );
             return $this->redirectToRoute('accueil');
         } 
 
